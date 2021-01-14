@@ -12,7 +12,6 @@
     "core-js": "^2.6.5",
     "element-ui": "^2.14.1",
     "vue": "^2.6.6",
-    "vue-hotzone": "^1.1.0",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.20.0"
   },

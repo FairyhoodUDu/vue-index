@@ -11,23 +11,22 @@
 </template>
 <script>
 export default {
-  name: "Search",
-  props:{
-     bgColor: {
-       type:String,
-       default:"#ccc"
-     }
+  name: 'Search',
+  props: {
+    bgColor: {
+      type: String,
+      default: '#ccc'
+    }
   },
-  methods:{
+  methods: {
     getConfig: function () {
       return {
-        bgColor:this.bgColor
+        bgColor: this.bgColor
       }
     }
   }
-};
+}
 </script>
-
 
 <style scoped lang="less">
 .search {
@@ -57,9 +56,6 @@ export default {
     }
   }
 }
-
-
-
 
 
 </style>

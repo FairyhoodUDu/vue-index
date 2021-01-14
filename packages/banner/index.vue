@@ -11,24 +11,22 @@
         <b></b>
       </span>
     </span>
-    <el-carousel v-else :height="`${bannerHeight}px`" @change="currentIndex">
-      <el-carousel-item v-for="(item, index) in banner" :key="index">
-        <hotzone
-          :image="item.imgUrl"
-          :max="3"
-          :zonesInit="item.hotzone"
-          @add="zoneAdd"
-          @remove="zoneRemove"
-          @overRange="zoneLimit"
-          @change="zoneUpdate"
-        >
-        </hotzone>
-      </el-carousel-item>
-    </el-carousel>
+    <hotzone
+      :style="{ height: bannerHeight + 'px' }"
+      v-for="(item, index) in banner" :key="index"
+      :image="item.imgUrl"
+      :max="3"
+      :zonesInit="item.hotzone"
+      @add="zoneAdd"
+      @remove="zoneRemove"
+      @overRange="zoneLimit"
+      @change="zoneChange"
+    >
+    </hotzone>
   </div>
 </template>
 <script>
-import hotzone from 'vue-hotzone'
+import hotzone from '../../lib'
 export default {
   name: 'Search',
   data () {
@@ -46,7 +44,9 @@ export default {
           hotzone: []
         }
       ]
-    }
+    },
+    indexList: String,
+    cptName: String
   },
   components: {
     hotzone
@@ -75,24 +75,28 @@ export default {
     currentIndex (i) {
       this.current = i
     },
-    // 热区更新后的结果
-    zoneUpdate (result) {
-      console.log('zoneUpdate', result)
-    },
     // 热区添加
     zoneAdd (item) {
       console.log('zoneAdd', item)
+      debugger
       this.banner[this.current].hotzone.push({
         ...item,
         url: '' })
+      // 试图更新数据
+      this.$emit('change', this.indexList, this.cptName)
     },
     // 某个热区被删除
     zoneRemove (index) {
       console.log('zoneRemove', index)
+      debugger
       this.banner[this.current].hotzone.splice(index, 1)
+      this.$emit('change', this.indexList, this.cptName)
     },
     zoneLimit () {
       this.$message.error('热区超过个数限制')
+    },
+    zoneChange (zones) {
+      console.log('zoneChange', zones)
     }
   }
 }
@@ -135,6 +139,5 @@ export default {
 .emptyPlaceholder b + b {
   margin-left: 10px;
 }
-
 
 </style>

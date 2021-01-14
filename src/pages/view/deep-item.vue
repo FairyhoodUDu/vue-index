@@ -13,6 +13,7 @@
       <component
         :is="item.component"
         v-bind="item.props"
+        @change="viewChangeProps"
         :key="index"
         :class="{
           'viewCptItem': edit,
@@ -20,6 +21,7 @@
         }"
         @click.native.stop="handleSelect(indexKey(index),item.component)"
         :indexList="indexKey(index)"
+        :cptName="item.component"
         :ref="`cpt-${indexKey(index)}`"
       >
         <DeepItem
@@ -87,7 +89,19 @@ export default {
      * 选择组件
      */
     handleSelect: function (key, cpName) {
+      if (this.activeKey === key) {
+        return
+      }
+      console.log('handleSelect', key, cpName)
+      const props = this.$refs[`cpt-${key}`][0].getConfig()
+      this.select(key, props, cpName)
+    },
+    /**
+     * 视图更新数据
+     */
+    viewChangeProps (key, cpName) {
       debugger
+      console.log('viewChangeProps', key, cpName)
       const props = this.$refs[`cpt-${key}`][0].getConfig()
       this.select(key, props, cpName)
     }
@@ -111,5 +125,6 @@ export default {
     flex: 0 0 100%;
   }
 }
+
 
 </style>

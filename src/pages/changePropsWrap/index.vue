@@ -50,11 +50,6 @@ export default {
         type: 'delCpt'
       })
     }
-  },
-  watch: {
-    editComponentName (value) {
-      console.log('editComponentName', value)
-    }
   }
 }
 </script>
