@@ -77,8 +77,6 @@ export default {
       })
     },
     delItem (index) {
-      debugger
-      console.log('')
       this.$emit('delItem', index)
     },
     getZoneStyle (val) {

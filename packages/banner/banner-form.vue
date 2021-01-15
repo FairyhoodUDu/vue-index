@@ -69,7 +69,7 @@ export default {
       console.log('handleSuccess', res)
       const { url } = res.data
       this.editProps.banner[this.current].imgUrl = url
-      this.editProps.banner[this.current].height = 420
+      this.editProps.banner[this.current].height = 460
     },
     setCurrent (i) {
       this.current = i
